@@ -1,0 +1,32 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.6.RELEASE' apply false
+    //id 'com.chrisgahlert.gradle-dcompose-plugin' version '0.15.3'
+    id 'org.jetbrains.gradle.plugin.idea-ext' version '0.5'
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+allprojects {
+    plugins.withType(JavaPlugin) {
+        sourceCompatibility = '11'
+
+        group 'org.hoffmeyer'
+        version '0.1-SNAPSHOT'
+
+        configurations {
+            developmentOnly
+            runtimeClasspath {
+                extendsFrom developmentOnly
+            }
+            compileOnly {
+                extendsFrom annotationProcessor
+            }
+        }
+
+        repositories {
+            mavenCentral()
+        }
+
+    }
+}

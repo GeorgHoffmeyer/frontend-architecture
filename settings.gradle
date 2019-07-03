@@ -1,0 +1,5 @@
+include 'teamA_product:service'
+//includeFlat 'teamB_cart/service'
+//includeFlat 'teamC_order/service'
+//includeFlat 'teamD_navigation/service'
+//includeFlat 'website'
