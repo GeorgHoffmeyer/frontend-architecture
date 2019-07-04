@@ -53,6 +53,7 @@ class Productlist extends HTMLElement {
 
         response.data.forEach(element => {
             let productElement = document.createElement('li')
+            productElement.addEventListener('click', ()=>this.handleClick(element.id))
             productElement.setAttribute('data-product-id', element.id)
             productElement.innerHTML = element.name
             listElement.appendChild(productElement)
@@ -60,6 +61,12 @@ class Productlist extends HTMLElement {
 
         console.log("call finished in method")
     }
+
+    handleClick(productid) {
+        this.dispatchEvent(new CustomEvent('productlist:selected-product-changed', {'detail': {productid: productid, productlist: this.id}}))
+        console.log('product click' + productid)
+    }
+
 }
 
 customElements.define('product-list', Productlist)
