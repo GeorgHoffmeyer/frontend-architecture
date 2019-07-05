@@ -9,7 +9,7 @@
 /documentation
 
 # dependencies
-/node_modules
+/src/main/html/node_modules
 
 # IDEs and editors
 /.idea
