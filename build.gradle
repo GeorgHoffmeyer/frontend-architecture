@@ -8,11 +8,16 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 
 allprojects {
+    plugins.withId('com.chrisgahlert.gradle-dcompose-plugin') {
+        dcompose {
+            namePrefix = 'fa'
+        }
+    }
     plugins.withType(JavaPlugin) {
         sourceCompatibility = '11'
 
         group 'org.hoffmeyer'
-        version '0.1-SNAPSHOT'
+        //version '0.1-SNAPSHOT'
 
         configurations {
             developmentOnly

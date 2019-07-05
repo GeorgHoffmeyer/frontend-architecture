@@ -31,6 +31,7 @@ class ProductSummary extends HTMLElement {
 
     productChanged(event) {
         console.log(event)
+        console.log(event.detail.productid)
     }
 }
 

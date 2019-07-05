@@ -1,0 +1,28 @@
+plugins {
+    id "com.chrisgahlert.gradle-dcompose-plugin" version "0.15.1"
+}
+
+
+task copyHtml(type: Copy) {
+
+    from 'src/main/html'
+    into rootProject.file('website/build/dist/html/')
+
+}
+
+task build(dependsOn: 'copyHtml')
+
+dcompose {
+    website {
+        buildFiles = project.copySpec {
+            from file('build/dist')
+            from file('src/main/docker')
+            //from configurations.runtime
+        }
+        portBindings = ['8080:80']
+        exposedPorts = ['80']
+
+        //binds = ["${project.file('dist')}:/usr/share/nginx/html"]
+    }
+}
+

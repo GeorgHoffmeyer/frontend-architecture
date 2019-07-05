@@ -16,4 +16,12 @@ task npmBuild(type: NpmTask, dependsOn: 'npmInstall') {
     args = ['run-script', 'build']
 }
 
-task build(dependsOn: 'npmBuild')
+task copyDist(type: Copy) {
+    dependsOn 'npmBuild'
+
+    from 'build/dist'
+    into rootProject.file('website/build/dist/html/js')
+
+}
+
+task build(dependsOn: 'copyDist')

@@ -24,7 +24,7 @@ class Productlist extends HTMLElement {
 
     connectedCallback() {
         console.log('ProductList element added to page.');
-        axios.get('http://localhost:8080/product')
+        axios.get('/api/product/')
             .then((response) =>
                 this.processProductResponse(response)
             )
