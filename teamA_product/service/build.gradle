@@ -24,6 +24,6 @@ dcompose {
             from configurations.runtime
         }
         portBindings = ['8081:8080']
-        //exposedPorts = ['8080']
+        exposedPorts = ['8080']
     }
 }
