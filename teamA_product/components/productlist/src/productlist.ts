@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
 class Productlist extends HTMLElement {
-    shadow = this.attachShadow({mode: 'open'});
 
     constructor() {
         super();
@@ -10,40 +9,40 @@ class Productlist extends HTMLElement {
         }
         */
 
-        if(!this.hasAttribute('id')) {
+        if (!this.hasAttribute('id')) {
             this.id = 'productlist'
         }
 
+        const shadow = this.attachShadow({ mode: 'open' })
         const wrapper = document.createElement('template')
-        wrapper.innerHTML = '<p>I am a productlist</p>'
-        this.shadow.appendChild(wrapper.content)
+        wrapper.innerHTML = '<p>productlist</p>'
+        shadow.appendChild(wrapper.content)
 
+        console.log('ProductList element created.')
     }
-    
-    
+
+
     connectedCallback() {
-        console.log('Custom square element added to page.');
-        //updateStyle(this);
-
-        var shadowRootElem = this.shadowRoot
-
-        axios.get('http://localhost:8080/product').then((response) => this.processProductResponse(response))
-        
+        console.log('ProductList element added to page.');
+        axios.get('http://localhost:8080/product')
+            .then((response) =>
+                this.processProductResponse(response)
+            )
     }
 
     disconnectedCallback() {
-        console.log('Custom square element removed from page.');
+        console.log('ProductList element  removed from page.');
     }
-    
+
     adoptedCallback() {
-        console.log('Custom square element moved to new page.');
+        console.log('ProductList element moved to new page.');
     }
-    
+
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log('Custom square element attributes changed.');
+        console.log('ProductList element attributes changed.');
         //updateStyle(this);
     }
-    
+
     processProductResponse(response: AxiosResponse<any>) {
         console.log(response)
         var listElement = document.createElement('ul')
@@ -53,18 +52,16 @@ class Productlist extends HTMLElement {
 
         response.data.forEach(element => {
             let productElement = document.createElement('li')
-            productElement.addEventListener('click', ()=>this.handleClick(element.id))
+            productElement.addEventListener('click', () => this.handleClick(element.id))
             productElement.setAttribute('data-product-id', element.id)
             productElement.innerHTML = element.name
             listElement.appendChild(productElement)
         });
-
-        console.log("call finished in method")
     }
 
     handleClick(productid) {
-        this.dispatchEvent(new CustomEvent('productlist:selected-product-changed', {'detail': {productid: productid, productlist: this.id}}))
-        console.log('product click' + productid)
+        this.dispatchEvent(new CustomEvent('productlist:selected-product-changed', { bubbles: true, 'detail': { productid: productid, productlist: this.id } }))
+        console.log('product click ' + productid)
     }
 
 }
