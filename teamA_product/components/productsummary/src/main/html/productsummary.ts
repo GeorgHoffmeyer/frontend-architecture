@@ -45,9 +45,15 @@ class ProductSummary extends HTMLElement {
         let productDesciption = document.createElement('p')
         productDesciption.innerHTML = productJson.description
 
+        let addToCart = document.createElement('cart-add')
+        addToCart.setAttribute("data-cartitem-id", productJson.product.id)
+        addToCart.setAttribute("data-cartitem-description", productJson.product.name)
+        addToCart.setAttribute("data-cartitem-price", "2,99 EUR")
+
         this.shadowRoot.innerHTML = ''
         this.shadowRoot.append(productDetailheader)
         this.shadowRoot.append(productDesciption)
+        this.shadowRoot.append(addToCart)
     }
 }
 
