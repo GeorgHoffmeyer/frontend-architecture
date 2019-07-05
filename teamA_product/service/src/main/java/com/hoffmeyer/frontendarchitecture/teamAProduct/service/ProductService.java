@@ -22,6 +22,6 @@ public class ProductService {
     }
 
     public Optional<ProductDetail> getProductDetail(int productId) {
-        return productRepository.getDetail(productId);
+        return productRepository.getAllDetails().stream().filter(pd -> pd.getProduct().getId() == productId).findFirst();
     }
 }

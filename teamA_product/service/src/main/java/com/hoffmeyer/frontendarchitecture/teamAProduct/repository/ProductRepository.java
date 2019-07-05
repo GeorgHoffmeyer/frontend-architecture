@@ -12,8 +12,8 @@ import java.util.Optional;
 @Component
 public class ProductRepository {
 
-    private List<Product> products;
-    private List<ProductDetail> productDetails;
+    private final List<Product> products = new ArrayList<>();
+    private final List<ProductDetail> productDetails = new ArrayList<>();
 
     public List<Product> getAllProducts() {
         return products;
@@ -21,8 +21,6 @@ public class ProductRepository {
 
     @PostConstruct
     private void init() {
-        products = new ArrayList<>();
-        productDetails = new ArrayList<>();
 
         Product a = new Product(1, "Produkt A");
         Product b = new Product(2, "Product B");
@@ -37,7 +35,7 @@ public class ProductRepository {
         productDetails.add(detailsB);
     }
 
-    public Optional<ProductDetail> getDetail(int productId) {
-        return productDetails.stream().filter(pd -> pd.getProduct().getId() == productId).findFirst();
+    public List<ProductDetail> getAllDetails() {
+        return productDetails;
     }
 }
