@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/productlist.ts',
+  entry: './productlist.ts',
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -17,6 +17,6 @@ module.exports = {
   },
   output: {
     filename: 'productlist.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, '../../../build/dist')
   }
 };

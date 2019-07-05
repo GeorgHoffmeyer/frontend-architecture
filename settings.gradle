@@ -1,4 +1,6 @@
 include 'teamA_product:service'
+include 'teamA_product:components:productsummary'
+include 'teamA_product:components:productlist'
 //includeFlat 'teamB_cart/service'
 //includeFlat 'teamC_order/service'
 //includeFlat 'teamD_navigation/service'
