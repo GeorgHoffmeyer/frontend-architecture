@@ -15,7 +15,7 @@ class Productlist extends HTMLElement {
 
         const shadow = this.attachShadow({ mode: 'open' })
         const wrapper = document.createElement('template')
-        wrapper.innerHTML = '<p>productlist</p>'
+        wrapper.innerHTML = '<h1>productlist</h1>'
         shadow.appendChild(wrapper.content)
 
         console.log('ProductList element created.')
