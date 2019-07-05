@@ -31,7 +31,23 @@ class ProductSummary extends HTMLElement {
 
     productChanged(event) {
         console.log(event)
-        console.log(event.detail.productid)
+        this.loadProduct(event.detail.productid)
+    }
+
+    loadProduct(productId){
+        axios.get('/api/product/'+productId+'/').then(response => {this.renderProduct(response.data)})
+    }
+
+    renderProduct(productJson) {
+        let productDetailheader = document.createElement('h1')
+        productDetailheader.innerHTML = 'Product: ' + productJson.product.name
+
+        let productDesciption = document.createElement('p')
+        productDesciption.innerHTML = productJson.description
+
+        this.shadowRoot.innerHTML = ''
+        this.shadowRoot.append(productDetailheader)
+        this.shadowRoot.append(productDesciption)
     }
 }
 

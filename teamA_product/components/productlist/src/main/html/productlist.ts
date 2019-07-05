@@ -26,7 +26,7 @@ class Productlist extends HTMLElement {
         console.log('ProductList element added to page.');
         axios.get('/api/product/')
             .then((response) =>
-                this.processProductResponse(response)
+                this.processProductResponse(response.data)
             )
     }
 
@@ -43,14 +43,14 @@ class Productlist extends HTMLElement {
         //updateStyle(this);
     }
 
-    processProductResponse(response: AxiosResponse<any>) {
-        console.log(response)
-        var listElement = document.createElement('ul')
+    processProductResponse(productListJSON) {
+        console.log(productListJSON)
+        let listElement = document.createElement('ul')
         listElement.setAttribute('class', 'productlist')
 
         this.shadowRoot.appendChild(listElement)
 
-        response.data.forEach(element => {
+        productListJSON.forEach(element => {
             let productElement = document.createElement('li')
             productElement.addEventListener('click', () => this.handleClick(element.id))
             productElement.setAttribute('data-product-id', element.id)
