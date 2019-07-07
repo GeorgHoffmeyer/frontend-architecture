@@ -23,3 +23,5 @@ Folgene Technologien werden eingesetzt:
  - gradle als Build Tool
  - Docker für die bereitstellung der gesamten Infrastruktur
  
+# Routing / Navigation 
+grundsätzlich sollte vermieden werden dass eine Komponente auf eine andere Seite springt. 
