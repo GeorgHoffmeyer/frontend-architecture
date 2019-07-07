@@ -1,9 +1,9 @@
 package com.hoffmeyer.frontendarchitecture.teamCOrder.controller;
 
+import com.hoffmeyer.frontendarchitecture.teamCOrder.model.Customer;
 import com.hoffmeyer.frontendarchitecture.teamCOrder.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
@@ -11,4 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
+
+    @PutMapping("/{orderid}")
+    public String addCustomer(@PathVariable int orderid, @RequestBody Customer customer) {
+
+        return "GOTO PAYMENT";
+    }
 }
