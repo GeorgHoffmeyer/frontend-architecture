@@ -50,10 +50,14 @@ class ProductSummary extends HTMLElement {
         addToCart.setAttribute("data-cartitem-description", productJson.product.name)
         addToCart.setAttribute("data-cartitem-price", "2,99 EUR")
 
+        let linkToDetails = document.createElement('a')
+        linkToDetails.setAttribute('href', '/target/product/' + productJson.product.id + '/details')
+
         this.shadowRoot.innerHTML = ''
         this.shadowRoot.append(productDetailheader)
         this.shadowRoot.append(productDesciption)
         this.shadowRoot.append(addToCart)
+        this.shadowRoot.append(linkToDetails)
     }
 }
 

@@ -52,6 +52,8 @@ Bei dem Revers Proxy eintrag gibt es noch folgene möglichkeiten:
 Variante 1 hat dabei den charme das die Resourcen im Context der Anwendung bleiben. Sprünge aus Komponenten "erfragen" 
 nur ihr korrektes Ziel.
 
+In diesem beispiel habe ich die Anforderung mit rewrite Rules umgesetzt.
+
 ## Stylesheets
 Bei der Verwendung von webcomponenten stellt sich die Frage wie das Layout der Komponenten abegbildet wwerden soll. Auch
 hier gibt es im Grunde zwei mögliche Strategier:
