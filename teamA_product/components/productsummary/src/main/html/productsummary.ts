@@ -52,6 +52,7 @@ class ProductSummary extends HTMLElement {
 
         let linkToDetails = document.createElement('a')
         linkToDetails.setAttribute('href', '/target/product/' + productJson.product.id + '/details')
+        linkToDetails.innerText = 'More Details'
 
         this.shadowRoot.innerHTML = ''
         this.shadowRoot.append(productDetailheader)
