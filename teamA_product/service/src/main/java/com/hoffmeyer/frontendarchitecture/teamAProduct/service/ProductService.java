@@ -21,6 +21,10 @@ public class ProductService {
         return productRepository.getAllProducts();
     }
 
+    public Optional<Product> getProdcut(int productId) {
+        return productRepository.getAllProducts().stream().filter(p -> p.getId() == productId).findFirst();
+    }
+
     public Optional<ProductDetail> getProductDetail(int productId) {
         return productRepository.getAllDetails().stream().filter(pd -> pd.getProduct().getId() == productId).findFirst();
     }

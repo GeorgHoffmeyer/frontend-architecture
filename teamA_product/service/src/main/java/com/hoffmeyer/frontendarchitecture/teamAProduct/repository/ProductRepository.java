@@ -22,8 +22,8 @@ public class ProductRepository {
     @PostConstruct
     private void init() {
 
-        Product a = new Product(1, "Produkt A");
-        Product b = new Product(2, "Product B");
+        Product a = new Product(1, "Produkt A", "Summary for product A");
+        Product b = new Product(2, "Product B", "Summary for product B");
 
         products.add(a);
         products.add(b);

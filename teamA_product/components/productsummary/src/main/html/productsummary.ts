@@ -35,23 +35,23 @@ class ProductSummary extends HTMLElement {
     }
 
     loadProduct(productId){
-        axios.get('/api/product/'+productId+'/').then(response => {this.renderProduct(response.data)})
+        axios.get('/api/product/'+productId).then(response => {this.renderProduct(response.data)})
     }
 
     renderProduct(productJson) {
         let productDetailheader = document.createElement('h1')
-        productDetailheader.innerHTML = 'Product: ' + productJson.product.name
+        productDetailheader.innerHTML = 'Product: ' + productJson.name
 
         let productDesciption = document.createElement('p')
-        productDesciption.innerHTML = productJson.description
+        productDesciption.innerHTML = productJson.summary
 
         let addToCart = document.createElement('cart-add')
-        addToCart.setAttribute("data-cartitem-id", productJson.product.id)
-        addToCart.setAttribute("data-cartitem-description", productJson.product.name)
+        addToCart.setAttribute("data-cartitem-id", productJson.id)
+        addToCart.setAttribute("data-cartitem-description", productJson.name)
         addToCart.setAttribute("data-cartitem-price", "2,99 EUR")
 
         let linkToDetails = document.createElement('a')
-        linkToDetails.setAttribute('href', '/target/product/' + productJson.product.id + '/details')
+        linkToDetails.setAttribute('href', '/target/product/' + productJson.id + '/details')
         linkToDetails.innerText = 'More Details'
 
         this.shadowRoot.innerHTML = ''
