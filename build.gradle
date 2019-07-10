@@ -1,6 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.1.6.RELEASE' apply false
-    //id 'com.chrisgahlert.gradle-dcompose-plugin' version '0.15.3'
+    id "com.chrisgahlert.gradle-dcompose-plugin" version "0.15.3"
     id 'org.jetbrains.gradle.plugin.idea-ext' version '0.5'
 }
 
@@ -34,4 +34,55 @@ allprojects {
         }
 
     }
+}
+
+dcompose {
+
+    productService {
+        buildFiles = project(':teamA_product:service').copySpec {
+            from project(':teamA_product:service').file('build/libs')
+            from project(':teamA_product:service').file('src/main/docker')
+//            from project(':teamA_product:service').configurations
+        }
+        portBindings = ['8081:8080']
+        exposedPorts = ['8080']
+    }
+
+    cartService {
+        buildFiles = project(':teamB_cart:service').copySpec {
+            from project(':teamB_cart:service').file('build/libs')
+            from project(':teamB_cart:service').file('src/main/docker')
+//            from configurations.runtime
+        }
+        portBindings = ['8082:8080']
+        exposedPorts = ['8080']
+    }
+
+    orderService {
+        buildFiles = project(':teamC_order:service').copySpec {
+            from project(':teamC_order:service').file('build/libs')
+            from project(':teamC_order:service').file('src/main/docker')
+//            from configurations.runtime
+        }
+        portBindings = ['8083:8080']
+        exposedPorts = ['8080']
+    }
+
+    website {
+        buildFiles = project(':website').copySpec {
+            from project(':website').file('build/dist')
+            from project(':website').file('src/main/docker')
+            //from configurations.runtime
+        }
+        dependsOn = [
+                service(':productService'),
+                service(':cartService'),
+                service(':orderService')
+        ]
+        portBindings = ['8080:80']
+        exposedPorts = ['80']
+
+        //binds = ["${project.file('dist')}:/usr/share/nginx/html"]
+    }
+
 }

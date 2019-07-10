@@ -5,8 +5,8 @@ plugins {
 }
 
 node {
-    //download = false
-    //workDir = project.file("$project.buildDir/nodejs")
+    download = false
+    workDir = project.file("$project.buildDir/nodejs")
     npmWorkDir = project.file("$project.buildDir/npm")
     nodeModulesDir = project.file("src/main/html")
 }

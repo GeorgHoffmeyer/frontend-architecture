@@ -1,6 +1,5 @@
 plugins {
     id 'org.springframework.boot'
-    id "com.chrisgahlert.gradle-dcompose-plugin" version "0.15.1"
     id 'java'
 }
 
@@ -16,14 +15,3 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
 }
 
-dcompose {
-    productService {
-        buildFiles = project.copySpec {
-            from bootJar
-            from file('src/main/docker')
-            from configurations.runtime
-        }
-        portBindings = ['8081:8080']
-        exposedPorts = ['8080']
-    }
-}
