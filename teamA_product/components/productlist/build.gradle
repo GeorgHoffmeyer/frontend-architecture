@@ -5,13 +5,13 @@ plugins {
 }
 
 node {
-    download = false
+    download = true
     workDir = project.file("$project.buildDir/nodejs")
     npmWorkDir = project.file("$project.buildDir/npm")
     nodeModulesDir = project.file("src/main/html")
 }
 
-task npmBuild(type: NpmTask, dependsOn: 'npmInstall') {
+task npmBuild(type: NpmTask, dependsOn: npm_install) {
     //script = file('src/main/html')
     args = ['run-script', 'build']
 }

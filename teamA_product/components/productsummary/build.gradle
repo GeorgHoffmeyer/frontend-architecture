@@ -11,7 +11,7 @@ node {
     nodeModulesDir = project.file("src/main/html")
 }
 
-task npmBuild(type: NpmTask, dependsOn: 'npmInstall') {
+task npmBuild(type: NpmTask, dependsOn: npm_install) {
     //script = file('src/main/html')
     args = ['run-script', 'build']
 }
