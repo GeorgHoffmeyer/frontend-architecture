@@ -60,10 +60,14 @@ hier gibt es im Grunde zwei mögliche Strategier:
  1. Jede Kompnenten liefert ihre eigenen Stylesheets aus
  2. Komponenten bleiben frei von Layout informatienen, Stylesheets werden zentral in der Webanwendung verwaltet.
  
- Ich persönlich würde die zweite Variante bevorzugen, da hier einige Vorteile auf der Hand leigen:
-  -  die Komponenten müssen sich nicht um den CD (Coperate Design) des Unternehmens kümmern
-  - Kompnenten können in verschiedenen Marken eines Unternehmens mit unterschiedlichem CD verwendet werden
-  - das (Unternehmensweite) Styling kann zentral in einem Patternlab oder ähnlichem verwaltet werden
+Ich persönlich würde die zweite Variante bevorzugen, da hier einige Vorteile auf der Hand leigen:
+ -  die Komponenten müssen sich nicht um den CD (Coperate Design) des Unternehmens kümmern
+ - Kompnenten können in verschiedenen Marken eines Unternehmens mit unterschiedlichem CD verwendet werden
+ - das (Unternehmensweite) Styling kann zentral in einem Patternlab oder ähnlichem verwaltet werden
+
+Weiter Gedanken zum Thema Stylesheets:
+ - Grundsätzlich sollte man sich über das Thema Atomic Design gedanken machen. Gerade im Umgang mit Webcomponenten biete 
+   sich diser ansatz an. Jede Webcomponente wäre bei diesem Ansatz ein Molekühl oder ein Organismus. 
 
 ## JavaScript Frameworks
 Die Trennung in Komponenten bietet jedem Team die möglichkeit frei und autark zu arbeiten. Problematisch kann dies 
@@ -88,5 +92,15 @@ Komponente nur mit in einer bestimmten Plattform Version verfügbar. Hier könnt
 angewendet werden. Die Micro Version gibt Bugfixes an und sollte im Sinne von Continuous Integration und Continuous 
 Delivery lediglich der Dokumentation genügen. Die Webseiten sollten immer die aktuellste Micro Version verwenden.
 
- 
- 
+## Sonstiges
+Aktuell werder Webcomponents  nur in Chrome und Safari nativ unterstützt. Für  andere Browser muss ein polifill mit 
+ausgeliefert werden (Siehe: http://webcomponents.github.io/polyfills/).
+
+## Conclusion
+In Agilen Teams können Web-Components die Entwicklung deutlich vereinfachen.
+
+## Links
+ - [Micro-Frontends](https://micro-frontends.org/)
+ - [Orchestrating micrto-frontends](https://medium.com/dazn-tech/orchestrating-micro-frontends-a5d2674cbf33)
+ - [Java Magazin 2.19 erschienen: Moderne Frontend-Architekturen](https://jaxenter.de/java-magazin-2-19-frontend-editorial-79090)
+ - [Patternlab](https://patternlab.io)
