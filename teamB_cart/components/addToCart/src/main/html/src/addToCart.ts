@@ -4,10 +4,17 @@ class AddToCart extends HTMLElement {
     private itemid = ""
     private itemDescription = ""
     private itemPrice = ""
+    private contentWrapper : HTMLDivElement
 
     public constructor() {
         super();
-        this.attachShadow({mode: 'open'})
+        const shadow = this.attachShadow({mode: 'open'})
+        this.contentWrapper = document.createElement('div')
+        this.contentWrapper.setAttribute('class', 'cart-element cart-add')
+
+        shadow.appendChild(this.contentWrapper)
+
+        console.log('cart-add element created.')
     }
 
     public connectedCallback() {
@@ -30,9 +37,6 @@ class AddToCart extends HTMLElement {
         const addButton = document.createElement('button')
         addButton.innerText = 'Add Item to Cart'
 
-        const shadowroot = this.shadowRoot
-
-
         if (this.getAttribute('data-cartitem-id')) {
             this.itemid = this.getAttribute('data-cartitem-id')
         } else {
@@ -53,7 +57,7 @@ class AddToCart extends HTMLElement {
 
         addButton.addEventListener("click", () => this.handleClick())
 
-        shadowroot.append(addButton)
+        this.contentWrapper.append(addButton)
     }
 
     handleClick() {

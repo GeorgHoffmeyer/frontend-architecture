@@ -2,21 +2,20 @@ import axios, { AxiosResponse } from 'axios'
 
 class Productlist extends HTMLElement {
 
+    private contentWrapper : HTMLDivElement
+
     constructor() {
         super();
-        /*
-        productlist.prototype.createdCallback = function() {
-        }
-        */
 
         if (!this.hasAttribute('id')) {
             this.id = 'productlist'
         }
 
         const shadow = this.attachShadow({ mode: 'open' })
-        const wrapper = document.createElement('template')
-        wrapper.innerHTML = '<h1>productlist</h1>'
-        shadow.appendChild(wrapper.content)
+        this.contentWrapper = document.createElement('div')
+        this.contentWrapper.setAttribute('class', 'product-element product-list')
+
+        shadow.appendChild(this.contentWrapper)
 
         console.log('ProductList element created.')
     }
@@ -48,7 +47,7 @@ class Productlist extends HTMLElement {
         let listElement = document.createElement('ul')
         listElement.setAttribute('class', 'productlist')
 
-        this.shadowRoot.appendChild(listElement)
+        this.contentWrapper.appendChild(listElement)
 
         productListJSON.forEach(element => {
             let productElement = document.createElement('li')
@@ -67,12 +66,3 @@ class Productlist extends HTMLElement {
 }
 
 customElements.define('product-list', Productlist)
-
-/*
-window.addEventListener('DOMContentLoaded', () => {
-    const element = document.querySelector('product-list');
-    setTimeout(() => {
-        element.parentNode.removeChild(element);
-    }, 2000);
-});
-*/

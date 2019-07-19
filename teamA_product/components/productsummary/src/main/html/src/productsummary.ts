@@ -1,13 +1,17 @@
 import axios, { AxiosResponse } from 'axios'
 
 class ProductSummary extends HTMLElement {
+
+    private contentWrapper : HTMLDivElement
+
     constructor() {
         super()
 
         const shadow = this.attachShadow({mode: 'open'})
-        const wrapper = document.createElement('template')
-        wrapper.innerHTML = '<p>Product Summary</p>'
-        shadow.appendChild(wrapper.content)
+        this.contentWrapper = document.createElement('div')
+        this.contentWrapper.setAttribute('class', 'product-element product-summary')
+
+        shadow.appendChild(this.contentWrapper)
 
         console.log('ProductDetail element created.')
     }
@@ -54,11 +58,11 @@ class ProductSummary extends HTMLElement {
         linkToDetails.setAttribute('href', '/target/product/' + productJson.id + '/details')
         linkToDetails.innerText = 'More Details'
 
-        this.shadowRoot.innerHTML = ''
-        this.shadowRoot.append(productDetailheader)
-        this.shadowRoot.append(productDesciption)
-        this.shadowRoot.append(addToCart)
-        this.shadowRoot.append(linkToDetails)
+        this.contentWrapper.innerHTML = ''
+        this.contentWrapper.append(productDetailheader)
+        this.contentWrapper.append(productDesciption)
+        this.contentWrapper.append(addToCart)
+        this.contentWrapper.append(linkToDetails)
     }
 }
 
