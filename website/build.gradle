@@ -9,6 +9,11 @@ task copyHtml(type: Copy) {
 
 }
 
+task cleanDist(type: Delete) {
+    delete 'build'
+}
+
 task build(dependsOn: 'copyHtml')
 
+task clean(dependsOn: 'cleanDist')
 

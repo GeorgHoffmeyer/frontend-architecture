@@ -8,6 +8,20 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 
 allprojects {
+    plugins.withId('frontendarchitecture-webcomponent') {
+
+        tasks.create('copyDist', Copy) { Copy task ->
+            task.dependsOn 'npmBuild'
+
+            task.from 'build/dist'
+            task.into rootProject.file('website/build/dist/html/js')
+
+        }
+
+
+        task build(dependsOn: 'copyDist')
+        task clean(dependsOn: 'cleanDist')
+    }
     plugins.withId('com.chrisgahlert.gradle-dcompose-plugin') {
         dcompose {
             namePrefix = 'fa'

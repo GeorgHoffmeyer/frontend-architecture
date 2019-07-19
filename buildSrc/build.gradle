@@ -1,0 +1,15 @@
+apply plugin: 'groovy'
+apply plugin: 'java-gradle-plugin'
+
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+dependencies{
+    //compile 'com.google.guava:guava:27.1-jre'
+    compile 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+}

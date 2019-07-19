@@ -1,6 +1,7 @@
 include 'website'
 include 'teamA_product:service'
 include 'teamA_product:components:productsummary'
+include 'teamA_product:components:productdetails'
 include 'teamA_product:components:productlist'
 include 'teamB_cart:service'
 include 'teamB_cart:components:addToCart'
