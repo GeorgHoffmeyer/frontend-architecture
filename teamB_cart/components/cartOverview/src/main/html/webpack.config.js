@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './cartOverview.ts',
+  entry: './src/cartOverview.ts',
   devtool: 'inline-source-map',
   module: {
     rules: [
