@@ -1,10 +1,16 @@
 import axios, { AxiosResponse } from 'axios'
 
 class CartOverview extends HTMLElement {
+    private contentWrapper : HTMLDivElement;
 
     public constructor() {
         super();
         this.attachShadow({mode: 'open'})
+        this.contentWrapper = document.createElement('div')
+
+        this.contentWrapper.setAttribute('class', 'cart-element cart-overview')
+
+        this.shadowRoot.append(this.contentWrapper)
     }
 
     public connectedCallback() {
@@ -26,11 +32,11 @@ class CartOverview extends HTMLElement {
     }
 
     private render() {
+
         const overviewHeader = document.createElement('h1')
         overviewHeader.innerText = 'no items in cart'
 
-        const shadowroot = this.shadowRoot
-        shadowroot.append(overviewHeader)
+        this.contentWrapper.append(overviewHeader)
 
         axios.get('/api/cart/').then(result => {
             const overviewHeader = document.createElement('h1')
@@ -42,8 +48,8 @@ class CartOverview extends HTMLElement {
                 overviewHeader.innerText = 'no items in cart'
             }
 
-            shadowroot.innerHTML = ''
-            shadowroot.append(overviewHeader)
+            this.contentWrapper.innerHTML = ''
+            this.contentWrapper.append(overviewHeader)
 
             let itemOutterContainer = document.createElement('div')
             result.data.forEach(item => {
@@ -61,7 +67,7 @@ class CartOverview extends HTMLElement {
                 itemOutterContainer.append(itemContainer)
             })
 
-            shadowroot.append(itemOutterContainer)
+            this.contentWrapper.append(itemOutterContainer)
         })
     }
 }

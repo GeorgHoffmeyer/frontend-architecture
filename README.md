@@ -99,6 +99,9 @@ ausgeliefert werden (Siehe: http://webcomponents.github.io/polyfills/).
 ## Conclusion
 In Agilen Teams können Web-Components die Entwicklung deutlich vereinfachen.
 
+Die größte Herausforderung besteht vor allem darin die richtige Größe der Komponenten zu finden. Hier lohnt es sich 
+einen Blick auf Atomic Design zu werfen. 
+
 ## Links
  - [Micro-Frontends](https://micro-frontends.org/)
  - [Orchestrating micrto-frontends](https://medium.com/dazn-tech/orchestrating-micro-frontends-a5d2674cbf33)
