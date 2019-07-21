@@ -18,17 +18,38 @@ class CartOverview extends HTMLElement {
         console.log('cart overvice created')
         window.addEventListener('cart:item-add', (event)=>this.itemAddedHandler(event))
         // render component
+        this.applyStyles()
         this.render()
     }
 
     public disconnectedCallback() {
         //remove event Listenes
-        //window.removeEventListener('cart:item-add', this.itemAddedHandler)
+        window.removeEventListener('cart:item-add', this.itemAddedHandler)
     }
 
     itemAddedHandler(event) {
         console.log("handle cart add event")
         this.render();
+    }
+
+    private applyStyles() {
+        this.shadowRoot.childNodes.forEach(child => {
+            if(child.nodeName.toLowerCase() == 'link') {
+                this.shadowRoot.removeChild(child);
+            }            
+        })
+        if(this.hasAttribute("data-stylesheets")) {
+            let stylesheets = this.getAttribute("data-stylesheets")
+            stylesheets.split(',').forEach(el => {
+                let linkNode = document.createElement('link');
+                linkNode.setAttribute('href', el);
+                linkNode.setAttribute('type', 'text/css');
+                linkNode.setAttribute('rel', 'stylesheet');
+
+                this.shadowRoot.appendChild(linkNode);
+            })
+        }
+
     }
 
     private render() {

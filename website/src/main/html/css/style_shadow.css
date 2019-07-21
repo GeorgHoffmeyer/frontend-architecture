@@ -1,0 +1,8 @@
+.product-element {
+    background-color: red;
+}
+
+.cart-element {
+    border: 1px solid green;
+    /*background-color: green;*/
+}

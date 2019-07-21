@@ -19,6 +19,7 @@ class AddToCart extends HTMLElement {
 
     public connectedCallback() {
         // render component
+        this.applyStyles()
         this.render()
     }
 
@@ -30,11 +31,33 @@ class AddToCart extends HTMLElement {
     }
 
     private itemAddedHandler(event) {
+        this.applyStyles()
         this.render();
+    }
+
+    private applyStyles() {
+        this.shadowRoot.childNodes.forEach(child => {
+            if(child.nodeName.toLowerCase() == 'link') {
+                this.shadowRoot.removeChild(child);
+            }            
+        })
+        if(this.hasAttribute("data-stylesheets")) {
+            let stylesheets = this.getAttribute("data-stylesheets")
+            stylesheets.split(',').forEach(el => {
+                let linkNode = document.createElement('link');
+                linkNode.setAttribute('href', el);
+                linkNode.setAttribute('type', 'text/css');
+                linkNode.setAttribute('rel', 'stylesheet');
+
+                this.shadowRoot.appendChild(linkNode);
+            })
+        }
+
     }
 
     private render() {
         const addButton = document.createElement('button')
+        addButton.setAttribute('class', 'btn btn-primary')
         addButton.innerText = 'Add Item to Cart'
 
         if (this.getAttribute('data-cartitem-id')) {

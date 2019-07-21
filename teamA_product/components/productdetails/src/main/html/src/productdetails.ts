@@ -26,6 +26,7 @@ class ProductDetails extends HTMLElement {
                 console.log('productid from url: ' + this.productId);
             }
         }
+        this.applyStyles()
         this.render();
         console.log('Productdetail element added to page.');
     }
@@ -37,8 +38,29 @@ class ProductDetails extends HTMLElement {
             this.productId = this.getAttribute("data-productid")
 
         }
+        this.applyStyles()
         this.render();
         //updateStyle(this);
+
+    }
+    
+    private applyStyles() {
+        this.shadowRoot.childNodes.forEach(child => {
+            if(child.nodeName.toLowerCase() == 'link') {
+                this.shadowRoot.removeChild(child);
+            }            
+        })
+        if(this.hasAttribute("data-stylesheets")) {
+            let stylesheets = this.getAttribute("data-stylesheets")
+            stylesheets.split(',').forEach(el => {
+                let linkNode = document.createElement('link');
+                linkNode.setAttribute('href', el);
+                linkNode.setAttribute('type', 'text/css');
+                linkNode.setAttribute('rel', 'stylesheet');
+
+                this.shadowRoot.appendChild(linkNode);
+            })
+        }
 
     }
 

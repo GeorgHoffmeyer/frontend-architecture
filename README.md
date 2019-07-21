@@ -69,6 +69,36 @@ Weiter Gedanken zum Thema Stylesheets:
  - Grundsätzlich sollte man sich über das Thema Atomic Design gedanken machen. Gerade im Umgang mit Webcomponenten biete 
    sich diser ansatz an. Jede Webcomponente wäre bei diesem Ansatz ein Molekühl oder ein Organismus. 
 
+### Vererben von Stylesheets
+Der Shadow-DOM ist von dem normalen DOM abgekapselt. Damit sind auch Stylesheets die für die Seite gelten nicht auf dem Shadow-DOM verfügbar.
+
+Mit einer einfachen `applyStyles()` Methode gelöst werden:
+```
+private applyStyles() {
+  this.shadowRoot.childNodes.forEach(child => {
+    if(child.nodeName.toLowerCase() == 'link') {
+      this.shadowRoot.removeChild(child);
+    }            
+  })
+  if(this.hasAttribute("data-stylesheets")) {
+    let stylesheets = this.getAttribute("data-stylesheets")
+    stylesheets.split(',').forEach(el => {
+      let linkNode = document.createElement('link');
+      linkNode.setAttribute('href', el);
+      linkNode.setAttribute('type', 'text/css');
+      linkNode.setAttribute('rel', 'stylesheet');
+      this.shadowRoot.appendChild(linkNode);
+    })
+  }
+}
+```
+Damit können Stylesheets an in einer Komponente eingebunden werden:
+```
+<product-list data-stylesheets="css/style.css,css/bootstrap.min.css"></product-list>
+```
+Sollte der Einsatz von Globalen Stylesheets und bspw. Atomic Designs verfolgt werden, ist es ratsam die Stylesheets von aussen in die Komponente zu injezieren. Dadurch kann die gleiche Komponente einfacher auf verschiedenen Website  (oder für diverse Marken) eingesetzt werden und die Page auf der die Komponente eingesetzt wird entscheidet über das Layout.
+
+
 ## JavaScript Frameworks
 Die Trennung in Komponenten bietet jedem Team die möglichkeit frei und autark zu arbeiten. Problematisch kann dies 
 allerdings beim einsatz von JavaScript Frameworks werden. Nicht immer arbeiten alle Frameworks miteinander. 

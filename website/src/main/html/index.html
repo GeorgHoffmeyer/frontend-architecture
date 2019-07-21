@@ -3,12 +3,13 @@
 <head>
     <title>Test with webcomponents</title>
     <script src="js/webcomponents-bundle.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
 </head>
 <body>
-<cart-overview><h1>Einkaufswagen</h1></cart-overview>
-<product-list id="mylist"></product-list>
-<product-summary></product-summary>
+<cart-overview data-stylesheets="css/style.css,css/bootstrap.min.css"><h1>Einkaufswagen</h1></cart-overview>
+<product-list id="mylist" data-stylesheets="css/style.css,css/bootstrap.min.css"></product-list>
+<product-summary data-stylesheets="css/style.css,css/bootstrap.min.css"></product-summary>
 
 <script src="js/productlist.js"></script>
 <script src="js/productsummary.js"></script>

@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+import { link } from 'fs';
 
 class Productlist extends HTMLElement {
 
@@ -15,6 +16,12 @@ class Productlist extends HTMLElement {
         this.contentWrapper = document.createElement('div')
         this.contentWrapper.setAttribute('class', 'product-element product-list')
 
+        let linkNode = document.createElement('link')
+        linkNode.setAttribute('href', 'css/style_shadow.css');
+        linkNode.setAttribute('type', 'text/css');
+        linkNode.setAttribute('rel', 'stylesheet');
+
+        shadow.appendChild(linkNode)
         shadow.appendChild(this.contentWrapper)
 
         console.log('ProductList element created.')
@@ -23,6 +30,9 @@ class Productlist extends HTMLElement {
 
     connectedCallback() {
         console.log('ProductList element added to page.');
+
+        this.applyStyles();
+
         axios.get('/api/product/')
             .then((response) =>
                 this.processProductResponse(response.data)
@@ -40,6 +50,27 @@ class Productlist extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         console.log('ProductList element attributes changed.');
         //updateStyle(this);
+        this.applyStyles();
+    }
+
+    private applyStyles() {
+        this.shadowRoot.childNodes.forEach(child => {
+            if(child.nodeName.toLowerCase() == 'link') {
+                this.shadowRoot.removeChild(child);
+            }            
+        })
+        if(this.hasAttribute("data-stylesheets")) {
+            let stylesheets = this.getAttribute("data-stylesheets")
+            stylesheets.split(',').forEach(el => {
+                let linkNode = document.createElement('link');
+                linkNode.setAttribute('href', el);
+                linkNode.setAttribute('type', 'text/css');
+                linkNode.setAttribute('rel', 'stylesheet');
+
+                this.shadowRoot.appendChild(linkNode);
+            })
+        }
+
     }
 
     processProductResponse(productListJSON) {

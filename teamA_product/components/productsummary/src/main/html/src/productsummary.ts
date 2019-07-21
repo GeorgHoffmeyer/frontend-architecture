@@ -18,11 +18,13 @@ class ProductSummary extends HTMLElement {
 
     connectedCallback() {
         console.log('ProductDetail element added to page.')
+        this.applyStyles()
         window.addEventListener('productlist:selected-product-changed', (event) => this.productChanged(event))
     }
 
     disconnectedCallback() {
         console.log('ProductDetail element removed from page.')
+        window.removeEventListener('productlist:selected-product-changed', (event) => this.productChanged(event))
     }
 
     adoptedCallback() {
@@ -31,6 +33,27 @@ class ProductSummary extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         console.log('ProductDetail element attributes changed.')
+        this.applyStyles()
+    }
+
+    private applyStyles() {
+        this.shadowRoot.childNodes.forEach(child => {
+            if(child.nodeName.toLowerCase() == 'link') {
+                this.shadowRoot.removeChild(child);
+            }            
+        })
+        if(this.hasAttribute("data-stylesheets")) {
+            let stylesheets = this.getAttribute("data-stylesheets")
+            stylesheets.split(',').forEach(el => {
+                let linkNode = document.createElement('link');
+                linkNode.setAttribute('href', el);
+                linkNode.setAttribute('type', 'text/css');
+                linkNode.setAttribute('rel', 'stylesheet');
+
+                this.shadowRoot.appendChild(linkNode);
+            })
+        }
+
     }
 
     productChanged(event) {
@@ -53,7 +76,9 @@ class ProductSummary extends HTMLElement {
         addToCart.setAttribute("data-cartitem-id", productJson.id)
         addToCart.setAttribute("data-cartitem-description", productJson.name)
         addToCart.setAttribute("data-cartitem-price", "2,99 EUR")
-
+        if(this.hasAttribute("data-stylesheets")) {
+            addToCart.setAttribute("data-stylesheets", this.getAttribute("data-stylesheets"))
+        }
         let linkToDetails = document.createElement('a')
         linkToDetails.setAttribute('href', '/target/product/' + productJson.id + '/details')
         linkToDetails.innerText = 'More Details'
