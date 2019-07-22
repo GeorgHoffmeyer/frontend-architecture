@@ -55,7 +55,6 @@ dcompose {
         buildFiles = project(':teamA_product:service').copySpec {
             from project(':teamA_product:service').getTasksByName('bootJar', false)[0]
             from project(':teamA_product:service').file('src/main/docker')
-//            from project(':teamA_product:service').configurations
         }
         portBindings = ['8081:8080']
         exposedPorts = ['8080']
@@ -65,7 +64,6 @@ dcompose {
         buildFiles = project(':teamB_cart:service').copySpec {
             from project(':teamB_cart:service').getTasksByName('bootJar', false)[0]
             from project(':teamB_cart:service').file('src/main/docker')
-//            from configurations.runtime
         }
         portBindings = ['8082:8080']
         exposedPorts = ['8080']
@@ -75,7 +73,6 @@ dcompose {
         buildFiles = project(':teamC_order:service').copySpec {
             from project(':teamC_order:service').getTasksByName('bootJar', false)[0]
             from project(':teamC_order:service').file('src/main/docker')
-//            from configurations.runtime
         }
         portBindings = ['8083:8080']
         exposedPorts = ['8080']
@@ -83,10 +80,8 @@ dcompose {
 
     website {
         buildFiles = project(':website').copySpec {
-            //from project(':teamA_product:components:productdetails').getTasksByName('npmBuild', false)[0]
             from project(':website').getTasksByName('build', false)[0]
             from project(':website').file('src/main/docker')
-            //from configurations.runtime
         }
         dependsOn = [
                 service(':productService'),
@@ -95,8 +90,6 @@ dcompose {
         ]
         portBindings = ['8080:80']
         exposedPorts = ['80']
-
-        //binds = ["${project.file('dist')}:/usr/share/nginx/html"]
     }
 
 }
