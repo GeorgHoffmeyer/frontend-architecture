@@ -93,3 +93,9 @@ dcompose {
     }
 
 }
+
+task cleanUp(type: Delete) {
+        delete 'build'
+}
+
+task clean(dependsOn: 'cleanUp')
