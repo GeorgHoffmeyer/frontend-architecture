@@ -4,8 +4,12 @@ plugins {
 
 task copyHtml(type: Copy) {
 
-    from 'src/main/html'
-    into rootProject.file('website/build/dist/html/')
+    from project(':teamA_product:components:productdetails').getTasksByName('npmBuild', false)[0]
+    from project(':teamA_product:components:productlist').getTasksByName('npmBuild', false)[0]
+    from project(':teamA_product:components:productsummary').getTasksByName('npmBuild', false)[0]
+    from project(':teamB_cart:components:addToCart').getTasksByName('npmBuild', false)[0]
+    from project(':teamB_cart:components:cartOverview').getTasksByName('npmBuild', false)[0]
+    into project.file('build/dist/html/js')
 
 }
 
@@ -13,7 +17,14 @@ task cleanDist(type: Delete) {
     delete 'build'
 }
 
-task build(dependsOn: 'copyHtml')
+task build(type: Copy) {
+    dependsOn copyHtml
+    from 'src/main/html'
+    into project.file('build/dist/html/')
+
+    inputs.files project.fileTree(dir: 'src/main/html')
+    outputs.files project.fileTree(dir: 'build/dist')
+}
 
 task clean(dependsOn: 'cleanDist')
 

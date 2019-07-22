@@ -18,7 +18,7 @@ allprojects {
         }
 
 
-        task build(dependsOn: 'copyDist')
+        //task build(dependsOn: 'copyDist')
         task clean(dependsOn: 'cleanDist')
     }
     plugins.withId('com.chrisgahlert.gradle-dcompose-plugin') {
@@ -53,7 +53,7 @@ dcompose {
 
     productService {
         buildFiles = project(':teamA_product:service').copySpec {
-            from project(':teamA_product:service').file('build/libs')
+            from project(':teamA_product:service').getTasksByName('bootJar', false)[0]
             from project(':teamA_product:service').file('src/main/docker')
 //            from project(':teamA_product:service').configurations
         }
@@ -63,7 +63,7 @@ dcompose {
 
     cartService {
         buildFiles = project(':teamB_cart:service').copySpec {
-            from project(':teamB_cart:service').file('build/libs')
+            from project(':teamB_cart:service').getTasksByName('bootJar', false)[0]
             from project(':teamB_cart:service').file('src/main/docker')
 //            from configurations.runtime
         }
@@ -73,7 +73,7 @@ dcompose {
 
     orderService {
         buildFiles = project(':teamC_order:service').copySpec {
-            from project(':teamC_order:service').file('build/libs')
+            from project(':teamC_order:service').getTasksByName('bootJar', false)[0]
             from project(':teamC_order:service').file('src/main/docker')
 //            from configurations.runtime
         }
@@ -83,7 +83,8 @@ dcompose {
 
     website {
         buildFiles = project(':website').copySpec {
-            from project(':website').file('build/dist')
+            //from project(':teamA_product:components:productdetails').getTasksByName('npmBuild', false)[0]
+            from project(':website').getTasksByName('build', false)[0]
             from project(':website').file('src/main/docker')
             //from configurations.runtime
         }
